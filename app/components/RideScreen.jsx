@@ -2,7 +2,7 @@ import { ArrowLeft, Car, Clock, MapPin, Navigation, Users } from 'lucide-react-n
 import { useState } from 'react';
 import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
-export function RideScreen({ onNavigate }) {
+export default function RideScreen({ onNavigate }) {
   const [pickup, setPickup] = useState('');
   const [destination, setDestination] = useState('');
 

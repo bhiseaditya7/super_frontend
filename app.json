@@ -4,6 +4,12 @@
     "slug": "MyApp",
     "version": "1.0.0",
     "orientation": "portrait",
+    "fonts": {
+      "Poppins-Regular": "./assets/fonts/Poppins-Regular.ttf",
+      "Poppins-Medium": "./assets/fonts/Poppins-Medium.ttf",
+      "Poppins-SemiBold": "./assets/fonts/Poppins-SemiBold.ttf",
+      "Poppins-Bold": "./assets/fonts/Poppins-Bold.ttf"
+    },
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
