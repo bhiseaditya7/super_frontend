@@ -1,6 +1,13 @@
 // app/components/FoodScreen.jsx
 import { router } from "expo-router";
-import { ArrowLeft, Clock, Minus, Plus, Search, Star } from "lucide-react-native";
+import {
+  ArrowLeft,
+  Clock,
+  Minus,
+  Plus,
+  Search,
+  Star,
+} from "lucide-react-native";
 import { useState } from "react";
 import {
   Image,
@@ -120,47 +127,71 @@ export default function FoodScreen() {
       </View>
 
       {/* Categories */}
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginVertical: 8 }}>
-        {categories.map((cat) => (
-          <TouchableOpacity
-            key={cat.id}
-            style={[
-              styles.categoryBtn,
-              selectedCategory === cat.id && styles.categoryBtnActive,
-            ]}
-            onPress={() => setSelectedCategory(cat.id)}
-          >
-            <Text
-              style={{
-                color: selectedCategory === cat.id ? "#fff" : "#333",
-              }}
+      <View style={{ merginTop: 0 }}>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={{ marginVertical: 0 }}
+          contentContainerStyle={{ alignItems: "center", paddingHorizontal: 8 }}
+        >
+          {categories.map((cat) => (
+            <TouchableOpacity
+              key={cat.id}
+              style={[
+                styles.categoryBtn,
+                selectedCategory === cat.id && styles.categoryBtnActive,
+              ]}
+              onPress={() => setSelectedCategory(cat.id)}
             >
-              {cat.name}
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
+              <Text
+                style={{
+                  color: selectedCategory === cat.id ? "#fff" : "#333",
+                  fontSize: 13,
+                }}
+              >
+                {cat.name}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+      </View>
 
       {/* Content */}
       <ScrollView style={{ flex: 1, padding: 12 }}>
         {/* Restaurants */}
         <Text style={styles.sectionTitle}>Restaurants Near You</Text>
         {restaurants.map((res) => (
-          <View key={res.id} style={styles.card}>
+          <TouchableOpacity
+            key={res.id}
+            style={styles.card}
+            onPress={() => router.push(`/restaurant/${res.id}`)}
+          >
             <Image source={{ uri: res.image }} style={styles.cardImage} />
             <View style={{ padding: 8 }}>
               <Text style={{ fontWeight: "bold" }}>{res.name}</Text>
               <Text style={{ color: "#666" }}>{res.cuisine}</Text>
-              <View style={{ flexDirection: "row", alignItems: "center", marginTop: 4 }}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  marginTop: 4,
+                }}
+              >
                 <Star size={14} color="gold" fill="gold" />
                 <Text style={{ marginLeft: 4 }}>{res.rating}</Text>
               </View>
-              <View style={{ flexDirection: "row", alignItems: "center", marginTop: 4 }}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  marginTop: 4,
+                }}
+              >
                 <Clock size={14} />
                 <Text style={{ marginLeft: 4 }}>{res.deliveryTime}</Text>
               </View>
             </View>
-          </View>
+          </TouchableOpacity>
         ))}
 
         {/* Menu Items */}
@@ -169,7 +200,13 @@ export default function FoodScreen() {
           <View key={item.id} style={styles.menuCard}>
             <View style={{ flex: 1 }}>
               <Text style={{ fontWeight: "bold" }}>{item.name}</Text>
-              <View style={{ flexDirection: "row", alignItems: "center", marginTop: 4 }}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  marginTop: 4,
+                }}
+              >
                 <Star size={14} color="gold" fill="gold" />
                 <Text style={{ marginLeft: 4 }}>{item.rating}</Text>
               </View>
@@ -242,18 +279,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 8,
   },
-  categoryBtn: {
-    paddingVertical: 6,
-    paddingHorizontal: 14,
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: "#ccc",
-    marginRight: 8,
-  },
-  categoryBtnActive: {
-    backgroundColor: "#4f46e5",
-    borderColor: "#4f46e5",
-  },
+
   sectionTitle: {
     fontSize: 16,
     fontWeight: "bold",
@@ -306,5 +332,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 6,
+  },
+  categoryBtn: {
+    height: 30,
+    paddingHorizontal: 14,
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 8,
+  },
+  categoryBtnActive: {
+    backgroundColor: "purple",
+    borderColor: "purple",
   },
 });
